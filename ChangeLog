@@ -1,0 +1,56 @@
+finddup-1.02
++ Did code changes to follow perlcritic standards ( gentle ).
+
+finddup-1.01
++ Did code changes to follow perlstyle coding standard
++ fixed the issue: when unable to find md5sum for some files, those are skipped.
+
+finddup-1.00
++ Added the options
+	* -c : search for content duplication ( default )
+	* -n : name duplication of files
+	* -d : directory name duplication
+	* -s : print statistics
+	* -e : -e="org,bkup,bk" -- extension to be ignored in filename ( useful only with -n )
++ Removed the -f option
+	* not much useful.
++ Name duplication for files
++ Directory name duplication
++ Statistics option to print ( earlier it printed by default, but now only if -s option is given )
+	Number of Duplications available: 2849
+	Total number of Blocks occupied by duplicates: 242996
+
+
+finddup-0.03
++ Changed the option -x to -a, to make it similar as ls.
+	* ls -a : Display hidden files, like that finddup -a.
++ formatted the output better as,
+	+ Printed statistics at the first.
+	+ Sorted the output by block size, and printed the number of blocks occupied 
+	by each file at first.
++ Designed website: http://finddup.sourceforge.net/
++ Added useful comments, so Perl'ers can understand how this utility works.	
++ did several performance tweaks such as,
+	+ used split function, instead of cut command.
+	+ delete unwanted hash whenever not required.
++ Bugs handled:
+	* If find command is not given then that is warned in stderr.
+	* file names with Spaces are handled.
+
+finddup-0.02
+* find the size of the files, if more than one file has the same 
+size then find the md5sum hash for only those files. Thus how 
+the performance gets improved drastically.
+* -f option
+find command can also be got from the users. ( will be very useful for 
+the users who are knowledged in Linux find command ). 
+* -x option
+include the hidden files in search. 
+* -u option
+print the usage, and exit.
+
+
+finddup-0.01
+* basic implementation of finddup.
+* used a default find command, and found md5sum for all files. If
+more than one file has same md5sum then that is a duplicate file.

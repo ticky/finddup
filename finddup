@@ -1,0 +1,39 @@
+#!/usr/bin/perl -s
+
+################################################################################
+#        USAGE:  ./finddup.pl [options] [path]
+#  DESCRIPTION:  To find duplicate files by content, name, and for directory.
+#       AUTHOR:  Sathiyamoorthy <sathiya.linux@gmail.com>
+################################################################################
+
+use strict;
+use warnings;
+
+use Finddup qw(frame_find_cmd content_duplicate filename_duplicate dirname_duplicate);
+use vars qw ( $a $u $c $n $d $s $e ); # command line options.
+
+# USAGE
+if ( defined $u )  {
+    die <<USAGE;
+Usage: $0 [options] [path]
+Options
+  # -a -- include the hidden files.
+  # -c -- search for content duplication ( default )
+  # -d -- directory name duplication
+  # -n -- name duplication of files
+  # -s -- print statistics
+  # -u -- print usage and exit
+  # -e='org,bkup,bk' -- extension to be ignored in filename ( useful only with -n )
+Path
+  # path to check for duplicate files ( default is current directory )
+USAGE
+}
+
+# forming the find command
+my $path = $ARGV[0] || '.';
+my $find_cmd = frame_find_cmd($path, $d, $a);
+
+# find the duplicates
+content_duplicate($find_cmd, $s)        unless ($n or $d); #default
+filename_duplicate($find_cmd, $e, $s)   if ($n);
+dirname_duplicate($find_cmd)            if ($d);

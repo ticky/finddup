@@ -1,0 +1,181 @@
+Examples: Following are some examples to understand the finddup usage.
+
+Example 1: Basic finddup usage
+------------------------------
+
+$ ./finddup
+
+Output displays files of the current directory which are all same by its content in groups. 
+
+Example 2:  Specifying path for finddup to find the duplicate files
+-------------------------------------------------------------------
+
+Syntax:
+$ ./finddup PATH_TO_SEARCH
+
+Example:
+$ ./finddup /etc
+Displays files of the /etc directory which are all same by its content. 
+
+Finddup does all its operation in a recursive manner, and excludes hidden 
+files by default ( to include hidden files use -a option ).
+
+Example 3: Finding duplicate files by name ( -n option )
+------------------------------------------
+
+./finddup -n /etc/
+
+This finds the duplicate files by name in the /etc directory.
+
+Example 4: Finding duplicate files by name and ignoring extensions
+------------------------------------------------------------------
+
+./finddup -n -e='.txt,.org'
+
+It searches the current directory for the filename duplication, and ignores the given extensions.
+
+
+Example 5: Finding duplicate directories by name ( -d option )
+------------------------------------------------
+
+./finddup -d /tmp/
+
+This finds the duplicate directories by name in /tmp directory.
+
+================================================================================
+
+Options & its usage
+===================
+
+-u  Print usage
+---------------
+
+# ./finddup -u
+Usage: ./finddup [options] [path]
+Options
+  # -a -- include the hidden files.
+  # -c -- search for content duplication ( default )
+  # -d -- directory name duplication
+  # -n -- name duplication of files
+  # -s -- print statistics
+  # -u -- print usage and exit
+  # -e='org,bkup,bk' -- extension to be ignored in filename ( useful only with
+  # -n )
+Path
+  # path to check for duplicate files ( default is current directory )
+
+
+-s  Printing the statistics
+---------------------------
+
+# ./finddup -s
+
+You will get the below statistics printed along with the finddup.
+	Number of Duplications available: 2849
+	Total number of Blocks occupied by duplicates: 242996
+
+================================================================================
+
+Sample outputs
+==============
+
+1. Duplicate files by content
+-----------------------------
+
+# ./finddup /etc/
+Blocks occupied by each file: 1676
+/etc/selinux/targeted/policy/policy.21
+/etc/selinux/targeted/modules/active/policy.kern
+
+Blocks occupied by each file: 160
+/etc/squid/squid.conf
+/etc/squid/squid.conf.default
+
+Blocks occupied by each file: 144
+/etc/selinux/targeted/contexts/files/file_contexts
+/etc/selinux/targeted/modules/active/file_contexts
+
+.
+.
+.
+
+
+
+2. Duplicate fils by name ( with statistics )
+---------------------------------------------
+
+# ./finddup -s -n /etc/
+
+Number of Duplications available: 117
+Total number of Blocks occupied by duplicates (approx): 1360
+
+
+Filename: samba
+Locations:
+        /etc/sysconfig/samba
+        /etc/logrotate.d/samba
+        /etc/pam.d/samba
+
+Filename: nfs
+Locations:
+        /etc/sysconfig/nfs
+        /etc/rc.d/init.d/nfs
+
+Filename: prelink
+Locations:
+        /etc/sysconfig/prelink
+        /etc/cron.daily/prelink
+
+.
+.
+.
+.
+
+
+
+3. Duplicate fils by name and ignoring extensions
+-------------------------------------------------
+
+# ./finddup -n -e='.txt,.org'
+
+Filename: a
+Locations:
+        ./t/a
+        ./t/a.txt
+
+Filename: b
+Locations:
+        ./t/tt/b.txt
+        ./t/tt/b.org
+        ./t/tt/b
+        ./t/b.txt
+        ./t/b
+
+
+4. Duplicate directories by name
+--------------------------------
+
+# ./finddup -d /etc/ 
+
+Dirname: security
+Paths
+ /etc/
+ /etc/java/
+
+Dirname: makedev.d
+Paths
+ /etc/
+ /etc/udev/
+
+Dirname: x86_64-redhat-linux-gnu
+Paths
+ /etc/pango/
+ /etc/gtk-2.0/
+
+.
+.
+.
+
+
+
+================================================================================

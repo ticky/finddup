@@ -1,0 +1,53 @@
+INSTALL
+-------
+
+No need to install, You can use it straight away.
+
+1. Extract the tar and start using it..
+	tar xvzf finddup-1.0.tgz
+	./finddup -u
+
+For examples refer the "Examples" section in README.
+
+If you want this "finddup" to be invoked from anywhere, 
+1. copy/link it in an appropriate directory such as /usr/local/bin or set the proper PATH.
+2. Put the Finddup.pm in the proper PERLLIB path.
+
+================================================================================
+
+License
+-------
+
+Anybody can use, edit, merge, redistribute this code at free of cost. 
+You are using this software at your own risk.
+
+Website: http://finddup.sourceforge.net/
+
+Contact:
+--------
+
+If you find a bug or If you want a new feature, And anything related to this "finddup" write to me.
+I will be more than happy to read your feedback at sathiya.linux@gmail.com
+
+
+PreRequisites
+-------------
+
+1. You should have Perl installed. Most of the linux distributions has it by default.
+2. Nothing special: Basic commands like, find, md5sum are used in the code. It is expected to be available 
+in the default path. You dont have to do anything special for this, in normal linux systems it is 
+supposed to be available by default.
+
+Notes 
+-----
+1. To get familiarity with the find command, read my article at www.thegeekstuff.com
+	http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples/
+	http://www.thegeekstuff.com/2009/06/15-practical-unix-linux-find-command-examples-part-2/
+2. To find out the size of a block, use tune2fs command as mentioned below.
+
+Known Issues
+------------
+1. If you have different block size across file system, then this utility will not work as expected.
+2. For file content duplication: md5 is calculated using md5sum command, though it is costly to do md5sum command invocation ( new process for each file ), i used it for the time being.
+3. You may get Permission denied errors, if you dont have permission with the directories / files.
+4. Options has to be given separately ( as -n -s ). You cannot concatenate options as ( -ns ).
