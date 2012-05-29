@@ -33,7 +33,7 @@ sub content_duplicate
 
 	    # Efficient: Find md5sum for all files which has same size.
 		for ( 0 .. $#{$file_details{$cur_key_tmp}} )  {
-			$md5sum = (split /\s+/, `md5sum "$file_details{$cur_key_tmp}->[$_]"`)[0];	 
+			$md5sum = (split /\s=\s+/, `md5 "$file_details{$cur_key_tmp}->[$_]"`)[1];	 
             next unless defined $md5sum;  # skip if unable to find md5sum for any reason. 
 			$filename = $file_details{$cur_key_tmp}->[$_];
 	
